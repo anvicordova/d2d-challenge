@@ -18,24 +18,7 @@ RSpec.describe '/vehicles', type: :request do
   let(:valid_headers) do
     {}
   end
-
-  describe 'GET /index' do
-    it 'renders a successful response' do
-      Vehicle.create! valid_attributes
-
-      get vehicles_url, headers: valid_headers, as: :json
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET /show' do
-    it 'renders a successful response' do
-      vehicle = Vehicle.create! valid_attributes
-      get vehicle_url(vehicle), as: :json
-      expect(response).to be_successful
-    end
-  end
-
+  
   describe 'POST /create' do
     context 'with valid parameters' do
       it 'creates a new Vehicle' do
