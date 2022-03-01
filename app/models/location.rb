@@ -13,5 +13,5 @@
 #  vehicle_id :integer
 #
 class Location < ApplicationRecord
-  belongs_to :vehicle
+  belongs_to :vehicle_registration
 end

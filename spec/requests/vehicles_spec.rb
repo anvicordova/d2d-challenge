@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe '/vehicles', type: :request do
   let(:valid_attributes) do
-    build(:vehicle).attributes
+    build(:vehicle_registration).attributes
   end
 
   let(:invalid_attributes) do
@@ -21,11 +21,11 @@ RSpec.describe '/vehicles', type: :request do
   
   describe 'POST /create' do
     context 'with valid parameters' do
-      it 'creates a new Vehicle' do
+      it 'creates a new VehicleRegistration' do
         expect do
           post vehicles_url,
                params: { vehicle: valid_attributes }, headers: valid_headers, as: :json
-        end.to change(Vehicle, :count).by(1)
+        end.to change(VehicleRegistration, :count).by(1)
       end
 
       it 'renders a JSON response with the new vehicle' do
@@ -36,11 +36,11 @@ RSpec.describe '/vehicles', type: :request do
     end
 
     context 'with invalid parameters' do
-      it 'does not create a new Vehicle' do
+      it 'does not create a new VehicleRegistrationRegistration' do
         expect do
           post vehicles_url,
                params: { vehicle: invalid_attributes }, as: :json
-        end.to change(Vehicle, :count).by(0)
+        end.to change(VehicleRegistration, :count).by(0)
       end
 
       it 'renders a JSON response with errors for the new vehicle' do
@@ -54,10 +54,10 @@ RSpec.describe '/vehicles', type: :request do
 
   describe 'DELETE /destroy' do
     it 'destroys the requested vehicle' do
-      vehicle = Vehicle.create! valid_attributes
+      vehicle = VehicleRegistration.create! valid_attributes
       expect do
         delete vehicle_url(vehicle), headers: valid_headers, as: :json
-      end.to change(Vehicle, :count).by(-1)
+      end.to change(VehicleRegistration, :count).by(-1)
       expect(response).to have_http_status(:no_content)
     end
   end
@@ -65,7 +65,7 @@ RSpec.describe '/vehicles', type: :request do
   describe 'POST /location' do
     context 'with valid parameters' do
       it 'creates a new location for vehicle' do
-        vehicle = Vehicle.create! valid_attributes
+        vehicle = VehicleRegistration.create! valid_attributes
         expect do
           post vehicle_locations_url(vehicle),
                params: { location: locations_valid_attributes }, headers: valid_headers, as: :json

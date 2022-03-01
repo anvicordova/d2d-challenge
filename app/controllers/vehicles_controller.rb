@@ -5,7 +5,7 @@ class VehiclesController < ApplicationController
 
   # POST /vehicles
   def create
-    @vehicle = Vehicle.new(vehicle_params)
+    @vehicle = VehicleRegistration.new(vehicle_params)
 
     if @vehicle.save
       render json: {}, status: :no_content
@@ -24,7 +24,7 @@ class VehiclesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_vehicle
-    @vehicle = Vehicle.find(params[:id])
+    @vehicle = VehicleRegistration.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

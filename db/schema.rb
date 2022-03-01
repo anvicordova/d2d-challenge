@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_01_043409) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_01_192015) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,16 +20,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_01_043409) do
     t.datetime "sent_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "vehicle_id"
-    t.index ["vehicle_id"], name: "index_locations_on_vehicle_id"
+    t.integer "vehicle_registration_id"
+    t.index ["vehicle_registration_id"], name: "index_locations_on_vehicle_registration_id"
   end
 
-  create_table "vehicles", force: :cascade do |t|
+  create_table "vehicle_registrations", force: :cascade do |t|
     t.string "uuid", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_vehicles_on_deleted_at"
+    t.index ["deleted_at"], name: "index_vehicle_registrations_on_deleted_at"
   end
 
 end

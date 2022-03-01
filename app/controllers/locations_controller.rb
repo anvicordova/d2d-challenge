@@ -5,7 +5,7 @@ class LocationsController < ApplicationController
 
   def create
     @location = Location.new(location_params)
-    @location.vehicle = @vehicle
+    @location.vehicle_registration = @vehicle
 
     if @location.save
       render json: {}, status: :no_content
@@ -21,6 +21,6 @@ class LocationsController < ApplicationController
   end
 
   def set_vehicle
-    @vehicle = Vehicle.find(params[:vehicle_id])
+    @vehicle = VehicleRegistration.find(params[:vehicle_id])
   end
 end

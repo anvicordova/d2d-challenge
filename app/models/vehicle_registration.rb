@@ -10,7 +10,7 @@
 #  updated_at :datetime         not null
 #  deleted_at :datetime
 #
-class Vehicle < ApplicationRecord
+class VehicleRegistration < ApplicationRecord
   acts_as_paranoid
 
   has_many :locations
