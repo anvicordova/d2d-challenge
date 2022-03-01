@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_01_034612) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_01_035153) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_01_034612) do
     t.datetime "sent_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "vehicle_id"
+    t.index ["vehicle_id"], name: "index_locations_on_vehicle_id"
   end
 
   create_table "vehicles", force: :cascade do |t|
