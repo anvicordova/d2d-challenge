@@ -18,7 +18,7 @@ RSpec.describe '/vehicles', type: :request do
   let(:valid_headers) do
     {}
   end
-  
+
   describe 'POST /create' do
     context 'with valid parameters' do
       it 'creates a new VehicleRegistration' do
