@@ -4,7 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  latitude   :decimal(, )
-#  longitud   :decimal(, )
+#  longitude  :decimal(, )
 #  sent_at    :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
