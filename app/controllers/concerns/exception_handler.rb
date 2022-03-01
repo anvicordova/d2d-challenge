@@ -3,7 +3,6 @@
 module ExceptionHandler
   extend ActiveSupport::Concern
 
-
   included do
     rescue_from ActiveRecord::NotNullViolation do |error|
       json_response({ message: error.message }, :unprocessable_entity)
