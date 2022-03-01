@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: vehicles
+# Table name: vehicle_registrations
 #
 #  id         :bigint           not null, primary key
 #  uuid       :string           not null
