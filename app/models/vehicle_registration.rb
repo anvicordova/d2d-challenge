@@ -13,5 +13,7 @@
 class VehicleRegistration < ApplicationRecord
   acts_as_paranoid
 
+  validates :uuid, presence: true, uniqueness: true
+  
   has_many :locations
 end
