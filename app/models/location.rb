@@ -30,8 +30,8 @@ class Location < ApplicationRecord
     {
       latitude:,
       longitude:,
-      vehicle_registration_id:,
-      sent_at:
+      sent_at:,
+      vehicle_registration_id:
     }
   end
 

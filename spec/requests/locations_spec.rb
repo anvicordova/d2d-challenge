@@ -12,7 +12,19 @@ RSpec.describe '/vehicles', type: :request do
   end
 
   let(:locations_valid_attributes) do
-    build(:location).attributes
+    {
+      lat: '52.53',
+      lng: '13.403',
+      at: DateTime.now.utc
+    }
+  end
+
+  let(:expected_broadcast_attributes) do
+    {
+      latitude: locations_valid_attributes.fetch(:lat),
+      longitude: locations_valid_attributes.fetch(:lng),
+      sent_at: locations_valid_attributes.fetch(:at)
+    }
   end
 
   let(:locations_invalid_attributes) do
@@ -37,11 +49,11 @@ RSpec.describe '/vehicles', type: :request do
       it 'broadcasts the locations to subscribers' do
         vehicle = VehicleRegistration.create! valid_attributes
 
-        expected_broadcast_attributes = locations_valid_attributes.merge({ vehicle_registration_id: vehicle.id }).compact.as_json
+        broadcast_attributes = expected_broadcast_attributes.merge({ vehicle_registration_id: vehicle.id }).compact.as_json
         expect do
           post vehicle_locations_url(vehicle),
                params: { location: locations_valid_attributes }, headers: valid_headers, as: :json
-        end.to have_broadcasted_to('vehicle_location_channel').with(content: expected_broadcast_attributes)
+        end.to have_broadcasted_to('vehicle_location_channel').with(content: broadcast_attributes)
       end
 
       it 'does not broadcasts the locations outside range' do

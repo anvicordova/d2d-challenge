@@ -29,6 +29,7 @@ class VehiclesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def vehicle_params
-    params.require(:vehicle).permit(:uuid)
+    origin_params = params.require(:vehicle).permit(:id)
+    { uuid: origin_params[:id] }
   end
 end

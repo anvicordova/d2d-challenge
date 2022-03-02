@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe '/vehicles', type: :request do
   let(:valid_attributes) do
-    build(:vehicle_registration).attributes
+    { id: 'valid' }
   end
 
   let(:invalid_attributes) do
@@ -54,7 +54,7 @@ RSpec.describe '/vehicles', type: :request do
 
   describe 'DELETE /destroy' do
     it 'destroys the requested vehicle' do
-      vehicle = VehicleRegistration.create! valid_attributes
+      vehicle = VehicleRegistration.create!({ uuid: 'valid' })
       expect do
         delete vehicle_url(vehicle), headers: valid_headers, as: :json
       end.to change(VehicleRegistration, :count).by(-1)
