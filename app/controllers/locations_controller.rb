@@ -8,6 +8,7 @@ class LocationsController < ApplicationController
     @location.vehicle_registration = @vehicle
 
     if @location.save
+      broadcast_location
       render json: {}, status: :no_content
     else
       render json: @location.errors, status: :unprocessable_entity
@@ -15,6 +16,10 @@ class LocationsController < ApplicationController
   end
 
   private
+
+  def broadcast_location
+    ActionCable.server.broadcast('vehicle_location_channel', { content:  @location.broadcast_attributes })
+  end
 
   def location_params
     params.require(:location).permit(:vehicle_id, :latitude, :longitude, :sent_at)

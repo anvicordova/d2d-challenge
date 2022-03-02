@@ -14,4 +14,13 @@
 #
 class Location < ApplicationRecord
   belongs_to :vehicle_registration
+
+  def broadcast_attributes
+    {
+      latitude:,
+      longitude:,
+      vehicle_registration_id:,
+      sent_at:
+    }
+  end
 end
