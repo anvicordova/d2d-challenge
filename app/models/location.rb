@@ -13,6 +13,10 @@
 #  vehicle_registration_id :integer
 #
 class Location < ApplicationRecord
+  include Coordinatable
+
+  before_create :bearing_calculation
+
   belongs_to :vehicle_registration
 
   def in_city_boundaries?
@@ -29,5 +33,17 @@ class Location < ApplicationRecord
       vehicle_registration_id:,
       sent_at:
     }
+  end
+
+  def bearing_calculation
+    last_location = Location.where(vehicle_registration_id:).last
+    if last_location
+      self.bearing_angle = angle_from_coordinate(
+        origin_latitude: last_location.latitude,
+        origin_longitude: last_location.longitude,
+        destination_latitude: latitude,
+        destination_longitude: longitude
+      )
+    end
   end
 end
