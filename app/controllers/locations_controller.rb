@@ -8,7 +8,7 @@ class LocationsController < ApplicationController
     @location.vehicle_registration = @vehicle
 
     if @location.save
-      broadcast_location
+      broadcast_location if @location.valid_location?
       render json: {}, status: :no_content
     else
       render json: @location.errors, status: :unprocessable_entity

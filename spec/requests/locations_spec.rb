@@ -15,6 +15,10 @@ RSpec.describe '/vehicles', type: :request do
     build(:location).attributes
   end
 
+  let(:locations_invalid_attributes) do
+    build(:location, latitude: 9.99, longitude: 9.99).attributes
+  end
+
   let(:valid_headers) do
     {}
   end
@@ -38,6 +42,15 @@ RSpec.describe '/vehicles', type: :request do
           post vehicle_locations_url(vehicle),
                params: { location: locations_valid_attributes }, headers: valid_headers, as: :json
         end.to have_broadcasted_to('vehicle_location_channel').with(content: expected_broadcast_attributes)
+      end
+
+      it 'does not broadcasts the locations outside range' do
+        vehicle = VehicleRegistration.create! valid_attributes
+
+        expect do
+          post vehicle_locations_url(vehicle),
+               params: { location: locations_invalid_attributes }, headers: valid_headers, as: :json
+        end.not_to have_broadcasted_to('vehicle_location_channel')
       end
     end
   end

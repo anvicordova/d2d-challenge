@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :location do
-    latitude { '9.99' }
-    longitude { '9.99' }
+    latitude { '52.53' }
+    longitude { '13.403' }
     sent_at { DateTime.now.utc.iso8601 }
     vehicle_registration
   end
