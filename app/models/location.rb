@@ -15,7 +15,7 @@
 class Location < ApplicationRecord
   belongs_to :vehicle_registration
 
-  def valid_location?
+  def in_city_boundaries?
     Geocoder.configure(units: :km)
     distance_in_km = Geocoder::Calculations.distance_between([ENV['DEFAULT_LATITUDE'], ENV['DEFAULT_LONGITUDE']],
                                                              [latitude, longitude])
