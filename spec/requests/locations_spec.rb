@@ -40,7 +40,7 @@ RSpec.describe '/vehicles', type: :request do
       it 'creates a new location for vehicle' do
         vehicle = VehicleRegistration.create! valid_attributes
         expect do
-          post vehicle_locations_url(vehicle),
+          post vehicle_locations_url(vehicle.uuid),
                params: { location: locations_valid_attributes }, headers: valid_headers, as: :json
         end.to change(Location, :count).by(1)
         expect(response).to have_http_status(:no_content)
@@ -51,7 +51,7 @@ RSpec.describe '/vehicles', type: :request do
 
         broadcast_attributes = expected_broadcast_attributes.merge({ vehicle_registration_id: vehicle.id }).compact.as_json
         expect do
-          post vehicle_locations_url(vehicle),
+          post vehicle_locations_url(vehicle.uuid),
                params: { location: locations_valid_attributes }, headers: valid_headers, as: :json
         end.to have_broadcasted_to('vehicle_location_channel').with(content: broadcast_attributes)
       end
@@ -60,7 +60,7 @@ RSpec.describe '/vehicles', type: :request do
         vehicle = VehicleRegistration.create! valid_attributes
 
         expect do
-          post vehicle_locations_url(vehicle),
+          post vehicle_locations_url(vehicle.uuid),
                params: { location: locations_invalid_attributes }, headers: valid_headers, as: :json
         end.not_to have_broadcasted_to('vehicle_location_channel')
       end

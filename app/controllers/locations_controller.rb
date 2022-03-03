@@ -27,6 +27,6 @@ class LocationsController < ApplicationController
   end
 
   def set_vehicle
-    @vehicle = VehicleRegistration.find(params[:vehicle_id])
+    @vehicle = VehicleRegistration.find_by(uuid: params[:vehicle_id])
   end
 end
