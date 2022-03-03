@@ -79,3 +79,11 @@ rails server --binding 0.0.0.0 --port 4567
 ```
 
 ```
+
+10. Request examples
+
+```
+curl -H 'Content-Type: application/json'  --request POST  --data '{"vehicle": {"id":"xyz"}}' http://localhost:4567/vehicles
+curl -H 'Content-Type: application/json'  --request POST  --data '{"location":{"lat": 10.0, "lng": 20.0, "at": "2019-09-01T12:00:00Z" }}' http://localhost:4567/vehicles/xyz/locations
+
+```
